@@ -8,9 +8,15 @@ bool autimunism = false;
 
 double money = 100;
 
-bool flip;
+string fliporquit;
 
-bool errorloop = true;
+int coinflip;
+
+string headortail;
+
+double bet;
+
+string coinoutput;
 
 Random generator;
 generator = new Random();
@@ -26,50 +32,57 @@ while (!done)
 
     if (project == "1")
     {
-        while (errorloop)
-        {
+       
             Console.WriteLine($"You currently own {money.ToString("c")} do you wanna flip or quit. (Enter \"Flip\" / \"Quit\")");
 
-            if (Console.ReadLine().ToLower() == "flip")
+            fliporquit = Console.ReadLine().ToLower();
+
+            if (fliporquit == "flip")
             {
-                flip = true;
-                errorloop = false;
+              Console.WriteLine("Head or Tail (enter \"H\" or \"T\")");
+              headortail = Console.ReadLine().ToLower();
+              coinflip = generator.Next(2);
+
+            if (headortail == "h")
+              {
+               Console.WriteLine($"How much do you want to bet, you currently own {money.ToString("c")} (Enter numbers, ex. 100)");
+               double.TryParse(Console.ReadLine(), out bet);
+               if (bet <= 0 || bet > money)
+                {
+                    Console.WriteLine("Invalid input, try to give a positive input or an input that is not over your current balance.");
+                }
+               else
+                {
+                    
+                }
+              }
             }
-            else if (Console.ReadLine().ToLower() == "quit")
-            {
-                flip = false;
-                errorloop = false;
+            else if (fliporquit == "quit")
+            { 
+               
+                if (autimunism == true)
+                {
+                    Console.WriteLine("Thank you for playing you autistic fuck");
+                }
+                else
+                {
+                    Console.WriteLine("Was a pleasure to have you play here mate, see you sometime again soon!");
+                }
+                done = true;
             }
             else
             {
+                Console.Clear();
                 Console.WriteLine("Invalid input, try again.");
             }
-        }
+        
 
-       
-        {
-            if (autimunism == true)
-            {
-                Console.WriteLine("Thank you for playing you autistic fuck");
-            }
-            else
-            {
-                Console.WriteLine("Was a pleasure to have you play here mate, see you sometime again soon!");
-            }
-            done = true;
-        }
-        else
-        {
-
-
-
-
-
-
-
-        }
+           
+        
+           
+     
     }
-    if (project == "2")
+    else if (project == "2")
     {
         if (autimunism == true)
         {
