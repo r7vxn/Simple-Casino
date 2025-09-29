@@ -12,7 +12,7 @@ int coinflip;
 
 string headortail = "";
 
-double bet; 
+double bet = 0;
 
 double won;
 
@@ -66,54 +66,55 @@ Welcome to MY casino, if you need more money, just ask Yusuf >:D
                 }
             }
             coinflip = generator.Next(2);
-            if (headortail == "h" || headortail == "heads") 
+            if (headortail == "h" || headortail == "heads")
             {
                 while (betloop = false)
                 {
                     while (!double.TryParse(Console.ReadLine(), out bet))
                     {
                         Console.WriteLine("Invalid input, try again");
-                    }
-                    if (bet <= 0 || bet > money)
-                    {
-                        Console.Clear();
-                        Console.WriteLine("Invalid input, try to give a positive input or an input that is not over your current balance.");
-                        Console.WriteLine($"How much do you want to bet, you currently own {money.ToString("c")} (Enter numbers, ex. 100)");
-                        while (!double.TryParse(Console.ReadLine(), out bet))
+
+                        if (bet <= 0 || bet > money)
                         {
-                            Console.WriteLine("Invalid input, try again");
+                            Console.Clear();
+                            Console.WriteLine("Invalid input, try to give a positive input or an input that is not over your current balance.");
+                            Console.WriteLine($"How much do you want to bet, you currently own {money.ToString("c")} (Enter numbers, ex. 100)");
+                            while (!double.TryParse(Console.ReadLine(), out bet))
+                            {
+                                Console.WriteLine("Invalid input, try again");
+                            }
+                        }
+                        else
+                        {
+                            betloop = true;
                         }
                     }
-                    else
-                    {
-                        betloop = true;
-                    }
                 }
-               
-                    if (coinflip == 0)
-                    {
-                        Console.WriteLine("Congrats, head, you won!");
-                        won = bet;
-                        moneywon = won + money;
-                        money = moneywon;
-                        Console.WriteLine($"You won {won.ToString("c")}!");
-                        Console.WriteLine($"You currently own {moneywon.ToString("c")}");
-                        Console.WriteLine("Press ENTER to continue");
-                        Console.ReadLine();
-                        Console.Clear();
-                    }
-                    else if (coinflip == 1)
-                    {
-                        moneyloss = money - bet;
-                        money = moneyloss;
-                        Console.WriteLine("Too bad too sad you lost (LMFAO)");
-                        Console.WriteLine($"You lost {bet.ToString("c")}, skill issue LMAO.");
-                        Console.WriteLine($"You currently own {moneyloss.ToString("c")}");
-                        Console.WriteLine("Press ENTER to continue");
-                        Console.ReadLine();
-                        Console.Clear() ;
-                    }
-                
+
+                if (coinflip == 0)
+                {
+                    Console.WriteLine("Congrats, head, you won!");
+                    won = bet;
+                    moneywon = won + money;
+                    money = moneywon;
+                    Console.WriteLine($"You won {won.ToString("c")}!");
+                    Console.WriteLine($"You currently own {moneywon.ToString("c")}");
+                    Console.WriteLine("Press ENTER to continue");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+                else if (coinflip == 1)
+                {
+                    moneyloss = money - bet;
+                    money = moneyloss;
+                    Console.WriteLine("Too bad too sad you lost (LMFAO)");
+                    Console.WriteLine($"You lost {bet.ToString("c")}, skill issue LMAO.");
+                    Console.WriteLine($"You currently own {moneyloss.ToString("c")}");
+                    Console.WriteLine("Press ENTER to continue");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+
             }
             else if (headortail == "t" || headortail == "tails")
             {
@@ -151,7 +152,7 @@ Welcome to MY casino, if you need more money, just ask Yusuf >:D
                     }
                 }
             }
-           else
+            else
             {
                 Console.Clear();
                 Console.WriteLine("Invalid input, do better next time.");
@@ -161,10 +162,10 @@ Welcome to MY casino, if you need more money, just ask Yusuf >:D
         else if (fliporquit == "quit")
         {
             Console.WriteLine("Was a pleasure to have you play here mate, see you sometime again soon!");
-            
+
             done = true;
         }
-       //error message for flip or quit
+        //error message for flip or quit
         else
         {
             Console.Clear();
@@ -175,7 +176,7 @@ Welcome to MY casino, if you need more money, just ask Yusuf >:D
     else if (project == "2")
     {
         Console.WriteLine("Was a pleasure to have you play here mate, see you sometime again soon!");
-        
+
         done = true;
     }
     //Secret easter egg
