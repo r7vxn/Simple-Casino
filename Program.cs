@@ -4,7 +4,7 @@ done = false;
 
 string project;
 
-double money = 100;
+int money = 100;
 
 string fliporquit = "";
 
@@ -12,19 +12,21 @@ int coinflip;
 
 string headortail = "";
 
-double bet = 0;
+int bet = 0;
 
-double won;
+int won;
 
-double moneywon;
+int moneywon;
 
-double moneyloss;
+int moneyloss;
 
 bool hort = false;
 
 bool betloop = false;
 
 bool forq = false;
+
+bool menu = false;
 
 Random generator;
 generator = new Random();
@@ -33,15 +35,25 @@ generator = new Random();
 while (!done)
 {
     //menu
+    if (menu == false)
+    { 
     Console.WriteLine(@"
 Welcome to MY casino, if you need more money, just ask Yusuf >:D
     1. Continue to Casino
     2. Leave
     3. Ask Yusuf for money
     ");
-
-
-    project = Console.ReadLine();
+    }
+    else
+    {
+        Console.WriteLine(@"
+Welcome to MY casino, if you need more money, just ask Yusuf >:D
+    1. Play Again
+    2. Leave
+    3. Ask Yusuf for money
+    ");
+    }
+        project = Console.ReadLine();
 
     //gambling
     if (project == "1" && money != 0)
@@ -86,22 +98,34 @@ Welcome to MY casino, if you need more money, just ask Yusuf >:D
             //bet error loop
             while (betloop == false)
             {
-                Console.WriteLine($"How much do you want to bet, you currently own {money.ToString("c")} (Enter numbers, ex. 100)");
-                while (!double.TryParse(Console.ReadLine(), out bet))
+                Console.WriteLine($@"How much do you want to bet, you currently own {money.ToString("c")} (Enter numbers, ex. 100)
+REMEMBER, IN MY CASINO, YOU CANNOT BET CENTS
+You can also enter All for All in!");
+                while (true)
                 {
+                    string input = Console.ReadLine().ToLower();
+                    if (input == "all")
+                    {
+                        bet = money;
+                        break;
+                    }
+                    if (int.TryParse(input, out bet))
+                    {
+                        break;
+                    }
                     Console.Clear();
-                    Console.WriteLine("Invalid input, try again");
+                    Console.WriteLine("Invalid input, try again (I don't take cents)");
                     Console.WriteLine($"How much do you want to bet, you currently own {money.ToString("c")} (Enter numbers, ex. 100)");
                 }
                 if (bet <= 0 || bet > money)
                 {
                     Console.Clear();
                     Console.WriteLine("Invalid input, try to give a positive input or an input that is not over your current balance.");
-
                 }
                 else
                 {
                     betloop = true;
+                    menu = true;
                 }
 
             }
